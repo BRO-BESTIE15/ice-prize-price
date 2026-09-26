@@ -434,8 +434,8 @@ Create the first complete and polished version of Ice Prize Price.
 ### Required Features
 
 - [ ] Playable ice ball
-- [ ] WASD controls
-- [ ] Arrow-key controls
+- [x] WASD controls
+- [x] Arrow-key controls
 - [ ] Android touch controls
 - [ ] Diagonal movement
 - [ ] Ice physics
