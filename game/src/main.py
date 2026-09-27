@@ -8,7 +8,12 @@ BACKGROUND = "blue"
 radius = 100
 width = 10
 position = [200, 500]
-speed = 5
+velocity = [0, 0]
+acceleration = 0.5
+friction = 0.99
+MAX_SPEED = 8
+
+
 
 
 # Movement directions
@@ -87,16 +92,30 @@ while run:
         direction_x = mouse_direction_x
     
     
-    # Actually move
+    # HEE-HEE'
     if direction_y == "up":
-        position[1] -= speed
+        velocity[1] -= acceleration
     elif direction_y == "down":
-        position[1] += speed
-    
+        velocity[1] += acceleration
     if direction_x == "left":
-        position[0] -= speed
+        velocity[0] -= acceleration
     elif direction_x == "right":
-        position[0] += speed
+        velocity[0] += acceleration
+
+    # --------------- FRICTION ---------------
+    velocity[0] *= friction
+    velocity[1] *= friction
+
+    # --------------- MAXIMUM NORMAL SPEED ---------------
+    velocity[0] = max(-MAX_SPEED, min(MAX_SPEED, velocity[0]))
+    velocity[1] = max(-MAX_SPEED, min(MAX_SPEED, velocity[1]))
+
+    # --------------- MOVE ---------------
+    position[0] += velocity[0]
+    position[1] += velocity[1]
+    
+
+
         
     # ---------------- SCREEN BOUNDARIES ----------------
     if position[0] - radius <= 0:
@@ -116,8 +135,7 @@ while run:
         screen,
         "white",
         position,
-        radius,
-        width
+        radius
     )
 
     pygame.display.update()
@@ -126,4 +144,3 @@ while run:
     clock.tick(FPS)
 
 pygame.quit()
-
