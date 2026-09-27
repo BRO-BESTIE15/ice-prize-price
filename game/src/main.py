@@ -14,8 +14,6 @@ friction = 0.99
 MAX_SPEED = 8
 
 
-
-
 # Movement directions
 direction_x = None
 direction_y = None
@@ -97,6 +95,7 @@ while run:
         velocity[1] -= acceleration
     elif direction_y == "down":
         velocity[1] += acceleration
+
     if direction_x == "left":
         velocity[0] -= acceleration
     elif direction_x == "right":
@@ -115,18 +114,21 @@ while run:
     position[1] += velocity[1]
     
 
-
-        
     # ---------------- SCREEN BOUNDARIES ----------------
     if position[0] - radius <= 0:
         position[0] = radius
+        velocity[0] *= -1.5
     elif position[0] + radius >= SCREEN_SIZE[0]:
         position[0] = SCREEN_SIZE[0] - radius
+        velocity[0] *= -1.5
 
     if position[1] - radius <= 0:
         position[1] = radius
+        velocity[1] *= -1.5
     elif position[1] + radius >= SCREEN_SIZE[1]:
         position[1] = SCREEN_SIZE[1] - radius
+        velocity[1] *= -1.5
+
 
     # ---------------- DRAW ----------------
     screen.fill(BACKGROUND)
